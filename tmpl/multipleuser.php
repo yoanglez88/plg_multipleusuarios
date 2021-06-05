@@ -1,16 +1,25 @@
 <?php
-/**
- * @package     ${NAMESPACE}
- * @subpackage
- *
- * @copyright   A copyright
- * @license     A "Slug" license name e.g. GPL2
- */
+
+defined('_JEXEC') or die;
 
 $value = $field->value;
 
-if ($value == '') {
+if ($value == '')
+{
 	return;
 }
-?>
-<h1><?php echo JHtml::_('content.prepare', $value); ?></h1>
+
+$value = (array) $value;
+$texts = array();
+
+foreach ($value as $userId)
+{
+	if (!$userId)
+	{
+		continue;
+	}
+	
+	$texts[] = $userId;
+}
+
+echo htmlentities(implode(', ', $texts));
